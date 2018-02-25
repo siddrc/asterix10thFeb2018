@@ -1,0 +1,6 @@
+{
+	"name": "someApp",
+	"dependencies": {
+		"mongodb": "^3.0.3"
+	}
+}
