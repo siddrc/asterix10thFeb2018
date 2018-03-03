@@ -6,5 +6,6 @@ const express = require("express");
 const app = express();
 app.listen(3000);
 app.use('/hello',HelloRouteHandler.handle());
+debugger
 const endTime = new Date().getTime();
 console.log("Server started in "+(endTime-startTime)+" ms");
