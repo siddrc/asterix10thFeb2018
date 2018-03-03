@@ -15,6 +15,7 @@ class Database {
             collection.find(readParams.criteria).project(readParams.projection).toArray(function(error, docs) {
                 connection.close();
                 console.log(docs);
+                //readParams.callback(docs)
             });
         }
 
@@ -53,4 +54,25 @@ class Database {
             crudOperations(deleteHandler, deleteParams)
         }
     }
-}
+} 
+
+let db = new Database();
+ db.create ({
+     collectionName:"RashikTable",
+     payload:{"name" : "mayur"}
+ })
+
+// let db = new Database();
+// db.read({
+//     collectionName:"RashikTable",
+//     criteria:{"name" : "mayur"},
+//     projection:{"name" : 1}
+// })// let db = new Database();
+// db.update({
+//     collectionName: "RashikTable",
+//     criteria:{"name" : "mayur"},
+//     dataToBeUpdated:{$set : {"name" : "naved" , "age" : "28"}}
+// })// let db = new Database();
+// db.delete({
+//     collectionName:"RashikTable",
+//     dataToBeDeleted:{"age" : "28"}// })
