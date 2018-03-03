@@ -1,6 +1,8 @@
 {
 	"name": "someApp",
 	"dependencies": {
-		"mongodb": "^3.0.3"
+		"express": "^4.16.2",
+		"mongodb": "^3.0.3",
+		"nodemon": "^1.17.1"
 	}
 }

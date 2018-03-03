@@ -14,7 +14,7 @@ class Database {
             const collection = db.collection(readParams.collectionName)
             collection.find(readParams.criteria).project(readParams.projection).toArray(function(error, docs) {
                 connection.close();
-                console.log(docs);
+                readParams.callback(docs)
             });
         }
 
@@ -23,6 +23,7 @@ class Database {
             const collection = db.collection(createParams.collectionName);
             collection.insert(createParams.payload)
             connection.close();
+            createParams.callback();
         }
 
         function updateHandler(connection, updateParams) {
@@ -30,6 +31,7 @@ class Database {
             const collection = db.collection(updateParams.collectionName);
             collection.updateOne(updateParams.criteria, updateParams.dataToBeUpdated, function(error, r) {
                 connection.close();
+                updateParams.callback()
             })
         }
 
@@ -54,3 +56,4 @@ class Database {
         }
     }
 }
+module.exports = Database;
