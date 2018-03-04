@@ -4,7 +4,7 @@ Asterix Solutions Students from 10th Feb,2018 batch
 ### Usage is 
 1. npm install
 2. For debugging 
-   Install [this] for debugging node.js apps (https://chrome.google.com/webstore/detail/nodejs-v8-inspector-manag/gnhhdgbaldcilmgcpfddgdbkhjohddkj/related)
+   Install [this](https://chrome.google.com/webstore/detail/nodejs-v8-inspector-manag/gnhhdgbaldcilmgcpfddgdbkhjohddkj/related) for debugging node.js apps
 ```javascript 
     node --inspect app.js 
 ```
