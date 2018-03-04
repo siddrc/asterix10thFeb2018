@@ -5,9 +5,9 @@ Asterix Solutions Students from 10th Feb,2018 batch
 1. npm install
 2. For debugging 
    Install [this] for debugging node.js apps (https://chrome.google.com/webstore/detail/nodejs-v8-inspector-manag/gnhhdgbaldcilmgcpfddgdbkhjohddkj/related)
- ```javascript 
+```javascript 
     node --inspect app.js 
-    ```
+```
 
 ### TODOS:
 1. calling debug from npm
