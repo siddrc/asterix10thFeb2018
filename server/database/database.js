@@ -21,9 +21,10 @@ class Database {
         function createHandler(connection, createParams) {
             const db = connection.db(dbProperties.databaseName);
             const collection = db.collection(createParams.collectionName);
-            collection.insert(createParams.payload)
-            connection.close();
-            createParams.callback();
+            collection.insert(createParams.payload, function(error, rowsAffected) {
+                connection.close();
+                createParams.callback(rowsAffected);
+            })
         }
 
         function updateHandler(connection, updateParams) {

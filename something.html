@@ -1,0 +1,40 @@
+<!DOCTYPE>
+<html>
+<title>hehe</title>
+
+<body>
+	<h4>This form gets data from DB:</h4>
+    <br>
+    <input type="text" id="name"></input>
+    <input type="button" onclick="go()" value="GET DATA"></input>
+    <hr>
+    <input type="text" id="nameOfPerson"/>
+    <input type="text" id="age"/>
+    <input type="button" onclick="create()" value="CREATE DATA"></input>
+    <hr>
+   <script type="text/javascript">
+    function go() {
+        $.ajax({
+            type: 'GET',
+            url: "http://localhost:3000/hello?name="+$("#name").val(),
+        }).done(function(data) {
+            console.log(data)
+        })
+    }
+    function create(){
+      $.ajax({
+            type: 'POST',
+            url: "http://localhost:3000/hello",
+            data:{
+            	"name": $("#nameOfPerson").val(),
+                "age" : $("#age").val()
+            }
+        }).done(function(data) {
+            console.log(data)
+        })
+    }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+</body>
+
+</html>

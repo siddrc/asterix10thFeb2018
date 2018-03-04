@@ -8,14 +8,25 @@ class HelloRouteHandler {
            const database = new Database();
            const readParams = {
            	  "collectionName" : "FirstTable",
-              "criteria" : {} ,
-              "projection" : {},
+              "criteria" : {name:req.query.name} ,
+              "projection" : {_id:0},
               "callback" : function(data){
               	 res.send(data);
               }
            };
            database.read(readParams)
 		})
+    router.post("/",function(req,res){
+           const database = new Database();
+           const insertParams = {
+              "collectionName" : "FirstTable",
+              "payload" : req.body,
+              "callback" : function(data){
+                 res.send(data);
+              }
+           };
+           database.create(insertParams)
+    })
 		return router;
 	}
 }
