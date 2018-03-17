@@ -14,7 +14,10 @@ class Database {
             const collection = db.collection(readParams.collectionName)
             collection.find(readParams.criteria).project(readParams.projection).toArray(function(error, docs) {
                 connection.close();
-                readParams.callback(docs)
+                if (error)
+                    readParams.errorCallback(error);
+                else
+                    readParams.successCallback(docs)
             });
         }
 
@@ -23,24 +26,34 @@ class Database {
             const collection = db.collection(createParams.collectionName);
             collection.insert(createParams.payload, function(error, rowsAffected) {
                 connection.close();
-                createParams.callback(rowsAffected);
+                if (error)
+                    createParams.errorCallback(error);
+                else
+                    createParams.successCallback(rowsAffected)
             })
         }
 
         function updateHandler(connection, updateParams) {
             const db = connection.db(dbProperties.databaseName);
             const collection = db.collection(updateParams.collectionName);
-            collection.updateOne(updateParams.criteria, updateParams.dataToBeUpdated, function(error, r) {
+            collection.updateOne(updateParams.criteria, updateParams.dataToBeUpdated, function(error, rowsAffected) {
                 connection.close();
-                updateParams.callback()
+                if (error)
+                    updateParams.errorCallback(error);
+                else
+                    updateParams.successCallback(rowsAffected)
             })
         }
 
         function deleteHandler(connection, deleteParams) {
             const db = connection.db(dbProperties.databaseName);
             const collection = db.collection(deleteParams.collectionName);
-            collection.deleteOne(deleteParams.dataToBeDeleted, function(error, r) {
+            collection.deleteOne(deleteParams.dataToBeDeleted, function(error, rowsAffected) {
                 connection.close();
+                if (error)
+                    updateParams.errorCallback(error);
+                else
+                    updateParams.successCallback(rowsAffected)
             })
         }
         this.read = function(readParams) {

@@ -26,33 +26,7 @@ const HelloSchema = {
 
 class HelloRouteHandler {
     static handle() {
-        router.get("/", function(req, res) {
-            const database = new Database();
-            const readParams = {
-                "collectionName": "FirstTable",
-                "criteria": { name: req.query.name },
-                "projection": { _id: 0 },
-                "successCallback": function(data) {
-                    res.status(200).send(data);
-                },
-                "errorCallback" : function(error){
-                    res.status(500).send(error)
-                }
-            };
-            database.read(readParams)
-        })
         router.post("/", validate({ body: HelloSchema }), function(req, res) {
-            /*console.log("Yo ")
-            const database = new Database();
-            const insertParams = {
-                "collectionName": "FirstTable",
-                "payload": req.body,
-                "callback": function(data) {
-                    res.send(data);
-                }
-            };
-            database.create(insertParams)*/
-            
             const database = new Database();
             const insertParams = {
                 "collectionName": "FirstTable",

@@ -1,6 +1,6 @@
 'use strict'
 const router = require("express").Router();
-const Database = require("../database/database");
+const Database = require("../database/database_promises");
 const { Validator, ValidationError } = require('express-json-validator-middleware');
 const validator = new Validator({ allErrors: true });
 const validate = validator.validate;
@@ -24,7 +24,7 @@ const HelloSchema = {
     }
 }
 
-class HelloRouteHandler {
+class HelloRouteHandlerPromises {
     static handle() {
         router.get("/", function(req, res) {
             const database = new Database();
@@ -32,42 +32,25 @@ class HelloRouteHandler {
                 "collectionName": "FirstTable",
                 "criteria": { name: req.query.name },
                 "projection": { _id: 0 },
-                "successCallback": function(data) {
-                    res.status(200).send(data);
-                },
-                "errorCallback" : function(error){
-                    res.status(500).send(error)
+                "callback": function(data) {
+                    res.send(data);
                 }
             };
             database.read(readParams)
         })
         router.post("/", validate({ body: HelloSchema }), function(req, res) {
-            /*console.log("Yo ")
-            const database = new Database();
-            const insertParams = {
-                "collectionName": "FirstTable",
-                "payload": req.body,
-                "callback": function(data) {
-                    res.send(data);
-                }
-            };
-            database.create(insertParams)*/
-            
             const database = new Database();
             const insertParams = {
                 "collectionName": "FirstTable",
                 "payload": req.body
             };
-            async.seq(database.createAsync)(insertParams, function(error, cats) {
-                if (error) {
-                    console.error(error);
-                    res.json({ status: 'error', message: error });
-                } else {
-                    res.json({ status: 'ok', message: 'Cats found', data: cats });
-                }
+            database.create(insertParams).then((rowsAffected) => {
+                res.send(rowsAffected)
+            }).catch((error) => {
+                res.send(error)
             })
         })
         return router;
     }
 }
-module.exports = HelloRouteHandler
+module.exports = HelloRouteHandlerPromises

@@ -10,6 +10,14 @@ Asterix Solutions Students from 10th Feb,2018 batch
 ```
 
 ### TODOS:
+
+
+--Get all
+--Update, delete
+
+--Implement common engine...with business logic etc....may be in the project...
+
 1. calling debug from npm
 2. calling start app from npm
 3. calling test cases from npm
+

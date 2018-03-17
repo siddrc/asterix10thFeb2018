@@ -1,9 +1,13 @@
 {
 	"name": "someApp",
 	"dependencies": {
+		"async": "^2.6.0",
+		"bluebird": "^3.5.1",
 		"body-parser": "^1.18.2",
 		"cors": "^2.8.4",
 		"express": "^4.16.2",
+		"express-ajv": "^1.0.3",
+		"express-json-validator-middleware": "^1.2.1",
 		"mongodb": "^3.0.3",
 		"nodemon": "^1.17.1"
 	},
